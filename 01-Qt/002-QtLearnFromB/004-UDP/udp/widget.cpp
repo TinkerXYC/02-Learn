@@ -21,7 +21,7 @@ void Widget::dealMsg()
 {
     char buf[1024] = {0};
     QHostAddress cliAddr;
-    qint16 port;
+    quint16 port;
     qint64 len = udpSocket->readDatagram(buf,sizeof(buf),&cliAddr,&port);
     if (len > 0){
         QString str = QString("[%1：%2] %3")
@@ -34,4 +34,13 @@ void Widget::dealMsg()
 Widget::~Widget()
 {
     delete ui;
+}
+
+void Widget::on_ButtonSend_clicked()
+{
+    QString ip = ui->lineEditIP->text();
+    qint16 port = ui->lineEditPort->text().toInt();
+
+    QString str = ui->textEdit->toPlainText();
+    udpSocket->writeDatagram(str.toUtf8(),QHostAddress(ip),port);
 }

@@ -18,6 +18,9 @@ public:
 
     void dealMsg();
 
+private slots:
+    void on_ButtonSend_clicked();
+
 private:
     Ui::Widget *ui;
 
